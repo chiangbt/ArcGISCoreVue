@@ -40,7 +40,7 @@ yarn build
 yarn lint
 ```
 
-### Customize configuration
+### 上传到服务器
 
 ```
 scp -r documents/vscode/arcgisvue419/dist/* ubuntu@101.34.36.64:/var/www/html/arcgisvue
