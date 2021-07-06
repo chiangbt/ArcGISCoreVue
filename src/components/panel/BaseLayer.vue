@@ -204,11 +204,18 @@ export default {
                         popupTemplate: curlayer.popupTemplate
                     }))
                 }else if(curlayer.type === 'agsdynamic'){
-                    this.$store.state.mapView.map.add(new MapImageLayer({
-                        id: curlayer.id,
-                        url: curlayer.url,
-                        sublayers: curlayer.sublayers
-                    }))
+                    if(curlayer.sublayers){
+                        this.$store.state.mapView.map.add(new MapImageLayer({
+                            id: curlayer.id,
+                            url: curlayer.url,
+                            sublayers: curlayer.sublayers
+                        }))
+                    }else{
+                        this.$store.state.mapView.map.add(new MapImageLayer({
+                            id: curlayer.id,
+                            url: curlayer.url
+                        }))
+                    }
                 }else if(curlayer.type === 'tms'){
                     this.$store.state.mapView.map.add(new tmsLayer({
                         id: curlayer.id,

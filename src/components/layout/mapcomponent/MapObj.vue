@@ -15,6 +15,8 @@ import Legend from '@arcgis/core/widgets/Legend';
 import Measurement from '@arcgis/core/widgets/Measurement';
 import LocateViewModel from '@arcgis/core/widgets/Locate/LocateViewModel';
 import SketchViewModel from '@arcgis/core/widgets/Sketch/SketchViewModel';
+import axios from 'axios';
+import qs from 'qs';
 
 export default {
   name: "MapObj",
@@ -162,12 +164,66 @@ export default {
             switch (geom.type) {
               case 'point':
                 console.log(`point: [${geom.x},${geom.y}]`);
+                axios({
+                  method: 'post',
+                  url: appconfig.datasource.addfeature_url,
+                  data: qs.stringify({
+                    FeatureClassName: 'hk_point',
+                    f: 'pjson',
+                    featureJSON: JSON.stringify({
+                      attributes: { name: '武汉www', address:'湖北武汉' }, 
+                      geometry: {x: `${geom.x}`, y: `${geom.y}` , spatialReference:{wkid:3857}}
+                    })
+                  }),
+                  headers: {
+                    'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+                  }
+                }).then(function(response){
+                    console.log(response);
+                    //graphicsLayer.removeAll();
+                });
                 break;
               case 'polyline':
                 console.log(`paths: ${geom.paths}`);
+                axios({
+                  method: 'post',
+                  url: appconfig.datasource.addfeature_url,
+                  data: qs.stringify({
+                    FeatureClassName: 'hk_line',
+                    f: 'pjson',
+                    featureJSON: JSON.stringify({
+                      attributes: { name: '武汉www' }, 
+                      "geometry":{"paths": geom.paths ,"spatialReference":{"wkid":3857}}
+                    })
+                  }),
+                  headers: {
+                    'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+                  }
+                }).then(function(response){
+                  console.log(response);
+                  //graphicsLayer.removeAll();
+                });
                 break;
               case 'polygon':
                 console.log(`rings: ${geom.rings}`);
+                axios({
+                  method: 'post',
+                  url: appconfig.datasource.addfeature_url,
+                  data: qs.stringify({
+                    FeatureClassName: 'hk_parcel',
+                    f: 'pjson',
+                    featureJSON: JSON.stringify({
+                      attributes: { name: '武汉www' }, 
+                      "geometry":{"rings": geom.rings ,"spatialReference":{"wkid":3857}}
+                    })
+                  }),
+                  headers: {
+                    'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+                  }
+                }).then(function(response){
+                    console.log(response);
+                    //graphicsLayer.removeAll();
+                });
                 break;
               default:
                 console.log(geom);

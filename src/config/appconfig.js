@@ -14,7 +14,8 @@ module.exports = {
         minZoom: 3                  // 视图最小zoom
     },
     datasource: {                   // 数据源key
-        tdt_key: '11e76d03bc7360fdeadc8b188044b715'     // 天地图key
+        tdt_key: '11e76d03bc7360fdeadc8b188044b715',     // 天地图key
+        addfeature_url: 'https://desktop-chiang.geoportal.cn/arcgis/rest/services/SOE/china/MapServer/exts/GeodbSOE/addFeature'
     },
     // 地图组件
     widgets:[{
@@ -287,6 +288,14 @@ module.exports = {
                     }
                 }
             ],
+            valid: true
+        },{
+            title: '武汉(本地)',
+            key: '2-7',
+            type: 'agsdynamic',
+            zoom: 10,
+            center: [114.038, 30.55],
+            url: "https://desktop-chiang.geoportal.cn/arcgis/rest/services/SOE/china/MapServer",
             valid: true
         }]
     },{
