@@ -1,4 +1,24 @@
-# arcgisvue419
+# 基于VUE和ArcGIS/Core的WebGIS平台
+
+## 组件结构
+
+```
+main
+    App
+        MainLayout
+            Header
+            Sidebar
+                panel/BaseLayer
+                panel/Search
+                panel/Analyst
+                panel/About
+            MainPanel
+                mapcomponent/MapTool
+                mapcomponent/POISearch
+                mapcomponent/MapObj
+
+```
+
 
 ## Project setup
 ```
@@ -21,4 +41,7 @@ yarn lint
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+```
+scp -r documents/vscode/arcgisvue419/dist/* ubuntu@101.34.36.64:/var/www/html/arcgisvue
+```
