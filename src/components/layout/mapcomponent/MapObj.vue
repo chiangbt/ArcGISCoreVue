@@ -1,5 +1,5 @@
 <template>
-  <div id="map"></div>
+  <div id="map" :style="{height: scrollerHeight}"></div>
 </template>
 
 <script>
@@ -175,10 +175,17 @@ export default {
           }
         });
       });
-    }
+    },
   },
   async mounted () {
     this._createMapView()
+  },
+  computed: {
+    // 滚动区高度
+    // (业务需求：手机屏幕高度减去头部标题和底部tabbar的高度，当然这2个高度也是可以动态获取的)
+    scrollerHeight: function() {
+      return (window.innerHeight - 96 - 60) + 'px';
+    }
   }
 }
 </script>
@@ -186,7 +193,7 @@ export default {
 <style lang="less" scoped>
 #map {
   width: 100%;
-  height: calc(80vh);
+  // height: calc(80vh);
   z-index: 1;
 }
 /deep/ * {

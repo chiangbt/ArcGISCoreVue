@@ -30,6 +30,7 @@ import appconfig from './../../config/appconfig';
 import Basemap from "@arcgis/core/Basemap";
 import TileLayer from '@arcgis/core/layers/TileLayer';
 import ImageryTileLayer from '@arcgis/core/layers/ImageryTileLayer';
+import MapImageLayer from '@arcgis/core/layers/MapImageLayer';
 import WMTSLayer from '@arcgis/core/layers/WMTSLayer';
 import VectorTileLayer from '@arcgis/core/layers/VectorTileLayer';
 import SceneLayer from '@arcgis/core/layers/SceneLayer';
@@ -201,6 +202,12 @@ export default {
                         url: curlayer.url,
                         outFields: curlayer.outFields,
                         popupTemplate: curlayer.popupTemplate
+                    }))
+                }else if(curlayer.type === 'agsdynamic'){
+                    this.$store.state.mapView.map.add(new MapImageLayer({
+                        id: curlayer.id,
+                        url: curlayer.url,
+                        sublayers: curlayer.sublayers
                     }))
                 }else if(curlayer.type === 'tms'){
                     this.$store.state.mapView.map.add(new tmsLayer({

@@ -254,6 +254,40 @@ module.exports = {
             center: null,
             url: 'https://tiles.arcgis.com/tiles/P3ePLMYs2RVChkJx/arcgis/rest/services/Earth_at_Night_2016/MapServer',
             valid: true
+        },{
+            title: '华盛顿瓦片(本地)',
+            key: '2-5',
+            type: 'agstile',
+            zoom: 14,
+            center: [-77.023, 38.89],
+            url: 'https://desktop-chiang.geoportal.cn/arcgis/rest/services/SOE/washington/MapServer',
+            valid: true
+        },{
+            title: 'USA动态',
+            key: '2-6',
+            type: 'agsdynamic',
+            zoom: 4,
+            center: [-99.123, 39.0035],
+            url: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer",
+            sublayers: [{
+                    id: 1,
+                    visible: true
+                },
+                {
+                    id: 0,
+                    visible: true,
+                    definitionExpression: "pop2000 > 100000",
+                    renderer: {
+                        type: "simple", // autocasts as new SimpleRenderer()
+                        symbol: {
+                            type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+                            size: 3,
+                            color: "red"
+                        }
+                    }
+                }
+            ],
+            valid: true
         }]
     },{
         title: '3D数据',
